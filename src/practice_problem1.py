@@ -260,15 +260,7 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
-        new_contents = ''
-        for k in range(new_volume):
-            new_contents = new_contents + self.contents[k]
-        extra = ''
-        for k in range(new_volume, len(self.contents)):
-            extra = extra + self.contents[k]
-        self.contents = new_contents
-        self.volume = new_volume
-        return extra
+        
 
         # ---------------------------------------------------------------------
         # TODO: 5. Implement and test this function.
