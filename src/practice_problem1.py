@@ -43,12 +43,12 @@ def main():
     # run_test_init()
     # run_test_append_string()
     # run_test_double()
-    run_test_shrink()
+    # run_test_shrink()
     # run_test_double_then_shrink()
     # run_test_reset()
     # run_test_steal()
     # run_test_get_history()
-    # run_test_combined_box()
+    run_test_combined_box()
 
 
 ###############################################################################
@@ -96,9 +96,13 @@ class Box(object):
         """
         if len(contents) > volume:
             self.contents = ''
+            self.startContents = ''
         else:
             self.contents = contents
+            self.startContents = contents
         self.volume = volume
+        self.startVolume = volume
+        self.history = []
         # ---------------------------------------------------------------------
         # DONE: 2. Implement and test this function.
         #     See the testing code (below) for more examples.
@@ -260,7 +264,13 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
-        
+        self.volume = new_volume
+        s = ''
+        for k in range(new_volume):
+            s = s + self.contents[k]
+        r = ''
+        for k in range(new_volume, len(self.contents)):
+            r = r + self.contents[k]
 
         # ---------------------------------------------------------------------
         # TODO: 5. Implement and test this function.
@@ -337,8 +347,11 @@ class Box(object):
           Changes this Box's contents and volume to whatever they were
           when this Box was constructed.
         """
+        self.history.append(self.contents)
+        self.contents = self.startContents
+        self.volume = self.startVolume
         # ---------------------------------------------------------------------
-        # TODO: 7. Implement and test this function.
+        # DONE: 7. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -365,8 +378,9 @@ class Box(object):
         Type hints:
           :type other_box: Box
         """
+        other_box.contents = self.append_string(other_box.contents)
         # ---------------------------------------------------------------------
-        # TODO: 8. Implement and test this function.
+        # DONE: 8. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -408,6 +422,7 @@ class Box(object):
           h = b.get_history()
           #   h is now ['GoodGo', 'GoodBye']
         """
+        return self.history
         # ---------------------------------------------------------------------
         # TODO: 9. Implement and test this function.
         #     The testing code is already written for you (above).
@@ -435,6 +450,8 @@ class Box(object):
         Type hints:
           :type other_box: Box
         """
+        b = Box(self.contents + other_box.contents, self.volume + other_box.volume)
+        return b
         # ---------------------------------------------------------------------
         # TODO: 10. Implement and test this function.
         #     The testing code is already written for you (above).
