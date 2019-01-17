@@ -40,15 +40,15 @@ def main():
     # UN-comment tests as you work the problems.
     ###########################################################################
 
-    # run_test_init()
-    # run_test_append_string()
-    # run_test_double()
+    run_test_init()
+    run_test_append_string()
+    run_test_double()
     run_test_shrink()
-    # run_test_double_then_shrink()
-    # run_test_reset()
-    # run_test_steal()
-    # run_test_get_history()
-    # run_test_combined_box()
+    run_test_double_then_shrink()
+    run_test_reset()
+    run_test_steal()
+    run_test_get_history()
+    run_test_combined_box()
 
 
 ###############################################################################
@@ -266,9 +266,20 @@ class Box(object):
           :type new_volume: int
         """
         self.volume = new_volume
-        return self.append_string('')
+        x = ''
+        y = ''
+        if self.volume >= len(self.contents):
+            return ''
+        else:
+            for k in range(new_volume):
+                x = x + self.contents[k]
+            for k in range(new_volume, len(self.contents)):
+                y = y + self.contents[k]
+            self.contents = x
+            return y
+
         # ---------------------------------------------------------------------
-        # TODO: 5. Implement and test this function.
+        # DONE: 5. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -323,8 +334,11 @@ class Box(object):
         Type hints:
           :type new_volume: int
         """
+        x = len(self.double())
+        x = x + len(self.shrink(new_volume))
+        return x
         # ---------------------------------------------------------------------
-        # TODO: 6. Implement and test this function.
+        # DONE: 6. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -419,7 +433,7 @@ class Box(object):
         """
         return self.history
         # ---------------------------------------------------------------------
-        # TODO: 9. Implement and test this function.
+        # DONE: 9. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
@@ -448,7 +462,7 @@ class Box(object):
         b = Box(self.contents + other_box.contents, self.volume + other_box.volume)
         return b
         # ---------------------------------------------------------------------
-        # TODO: 10. Implement and test this function.
+        # DONE: 10. Implement and test this function.
         #     The testing code is already written for you (above).
         # ---------------------------------------------------------------------
         # ---------------------------------------------------------------------
